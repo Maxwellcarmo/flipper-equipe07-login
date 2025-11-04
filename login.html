@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .login-container {
+      background-color: white;
+      padding: 40px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      width: 300px;
+    }
+    .input-field {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    .login-button {
+      width: 100%;
+      padding: 12px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin: 20px 0;
+    }
+    .login-button:hover {
+      background-color: #0056b3;
+    }
+    .links {
+      margin-top: 15px;
+    }
+    .links a {
+      display: block;
+      color: #007bff;
+      text-decoration: none;
+      margin: 8px 0;
+    }
+    .links a:hover {
+      text-decoration: underline;
+    }
+  </style>
+  <script>
+    function fazerLogin() {
+      // Normaliza CPF removendo pontos/traços para comparar com o registro
+      const cpf = document.getElementById('cpfUsuario').value.replace(/\D/g, '');
+      const senha = document.getElementById('senhaUsuario').value;
+      const errorMessage = document.getElementById('errorMessage');
+      
+      // Pega a lista de usuários cadastrados
+      const usuarios = JSON.parse(localStorage.getItem('usuarios') || '[]');
+      
+      // Procura o usuário com o CPF e senha informados
+      const usuario = usuarios.find(u => u.cpf === cpf && u.senha === senha);
+      
+      if (!usuario) {
+        errorMessage.style.display = 'block';
+        errorMessage.textContent = 'CPF ou senha inválidos!';
+        return false;
+      }
+      
+  // Se encontrou o usuário, salva o estado de login e informações do usuário
+  localStorage.setItem('logado', 'true');
+  localStorage.setItem('cpfUsuario', cpf);
+  // salvar nome e tipo para exibir no index
+  if (usuario.nome) localStorage.setItem('nomeUsuario', usuario.nome);
+  if (usuario.tipoUsuario) localStorage.setItem('tipoUsuario', usuario.tipoUsuario);
+      
+      window.location.href = 'index.html';
+      return false;
+    }
+  </script>
+</head>
+<body>
+  <div class="login-container">
+    <h2>Login</h2>
+    <form onsubmit="return fazerLogin()">
+      <input type="text" class="input-field" id="cpfUsuario" placeholder="CPF" required pattern="\d{11}" title="Digite um CPF válido com 11 dígitos">
+      <input type="password" class="input-field" id="senhaUsuario" placeholder="Senha" required>
+      <div class="error-message" id="errorMessage" style="color: red; display: none; margin: 10px 0;"></div>
+      <button type="submit" class="login-button">Entrar</button>
+      <div class="links">
+        <a href="recupera_senha.html">Esqueceu sua senha?</a>
+        <a href="registrar.html">Não tem uma conta?</a>
+      </div>
+    </form>
+  </div>
+</body>
+</html>

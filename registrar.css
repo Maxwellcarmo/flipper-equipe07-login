@@ -1,0 +1,219 @@
+/* Reset Básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #0056b3; /* Azul primário Flipper */
+    --secondary-color: #42a5f5; /* Azul mais claro para botões e hover */
+    --background-color: #f4f7fb; /* Fundo claro */
+    --text-color: #333;
+    --placeholder-color: #999;
+    --border-radius-base: 10px;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; 
+    min-height: 100vh;
+    padding: 40px 20px; 
+}
+
+/* Contêiner principal do Card (Área do formulário) */
+.card-container {
+    background-color: white;
+    padding: 30px 35px;
+    border-radius: var(--border-radius-base);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    max-width: 420px; 
+    width: 100%;
+}
+
+/* --- Estilos do Cabeçalho e Logo --- */
+.header-logo {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.logo-circle {
+    width: 80px;
+    height: 80px;
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    margin: 0 auto 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 0 5px rgba(0, 86, 179, 0.2); 
+    overflow: hidden; 
+}
+
+.logo-real {
+    width: 100%;       
+    height: 100%;      
+    object-fit: cover; 
+    border-radius: 50%;
+    display: block;
+    transition: opacity 0.3s ease; /* Transição para a troca de imagem */
+}
+
+.main-title {
+    font-size: 1.8rem;
+    color: var(--text-color);
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.subtitle {
+    font-size: 0.95rem;
+    color: #666;
+}
+
+/* --- Estilos do Formulário --- */
+.form-register {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; 
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    position: relative; 
+}
+
+.input-group label {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-color);
+    margin-bottom: 5px;
+}
+
+/* Estilo base para todos os inputs e select */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+#cpf,
+#curso,
+select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+input::placeholder, select option[disabled] {
+    color: var(--placeholder-color);
+}
+
+input:focus, select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(0, 86, 179, 0.2);
+    outline: none;
+}
+
+/* Estilo para o campo de senha (com ícone de visibilidade) */
+.password-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.password-wrapper input {
+    padding-right: 40px; 
+}
+
+.toggle-password {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #999;
+    transition: color 0.2s;
+}
+
+.toggle-password:hover {
+    color: var(--primary-color);
+}
+
+/* Estilo para o Select (Tipo de Usuário) */
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.select-icon {
+    position: absolute;
+    right: 15px;
+    bottom: 12px;
+    font-size: 0.8rem;
+    color: var(--primary-color);
+    pointer-events: none; 
+}
+
+/* --- Botões de Ação --- */
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.btn {
+    flex: 1; 
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Botão Registrar (Azul) */
+.btn-registrar {
+    background-color: var(--primary-color);
+    color: white;
+    box-shadow: 0 3px 10px rgba(0, 86, 179, 0.4);
+}
+
+.btn-registrar:hover {
+    background-color: var(--secondary-color);
+}
+
+/* Botão Voltar (Branco com Borda) */
+.btn-voltar {
+    background-color: white;
+    color: var(--text-color);
+    border: 1px solid #ddd;
+}
+
+.btn-voltar:hover {
+    background-color: #f0f0f0;
+    border-color: var(--primary-color);
+}
+
+/* Responsividade */
+@media (max-width: 480px) {
+    .card-container {
+        padding: 20px;
+        box-shadow: none; 
+    }
+
+    .main-title {
+        font-size: 1.6rem;
+    }
+
+    .button-group {
+        flex-direction: column;
+    }
+}
